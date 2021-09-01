@@ -1,0 +1,35 @@
+import React, { useState } from "react";
+
+const Dropdown = (props) => {
+    const [open, setOpen] = useState(false);
+
+    const renderedOptions = props.options.map((opt, index) => {
+        if (opt.value === props.select.value) {
+            return null;
+        }
+
+
+        return (
+            <div key={index} className="item" onClick={() => props.onSelectedChange(opt)}>
+                {opt.label}
+            </div>
+        );
+    });
+
+
+
+    return (
+        <div className="ui form">
+            <div className="field">
+                <label className="label">Select a Color</label>
+                <div onClick={() => setOpen(!open)} className={`ui selection dropdown ${open ? 'visible active' : ''}`}>
+                    <i className="dropdown icon"></i>
+                    <div className="text">{props.select.label}</div>
+                    <div className={`menu ${open ? 'visible transition' : ''}`}>{renderedOptions}</div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Dropdown;
